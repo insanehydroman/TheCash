@@ -26,9 +26,13 @@ public class ThirdPersonMover : MonoBehaviour
         float horizontal = Input.GetAxis("Horizontal");
         float vertical = Input.GetAxis("Vertical");
         if (Input.GetKey(KeyCode.LeftShift))
+        {
             vertical *= 2;
+            horizontal *= 2;
+        }
 
         var velocity = new Vector3(horizontal, 0, vertical);
+        velocity.Normalize();
         velocity *= _moveSpeed * Time.fixedDeltaTime;
         Vector3 offset = transform.rotation * velocity;
         _rb.MovePosition(transform.position + offset);
