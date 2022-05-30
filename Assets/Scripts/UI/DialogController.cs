@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using System.Text;
 using Ink.Runtime;
 using TMPro;
@@ -8,16 +6,16 @@ using UnityEngine.UI;
 
 public class DialogController : MonoBehaviour
 {
-    [SerializeField] TextAsset _dialog;
+    
     [SerializeField] TMP_Text _storyText;
     [SerializeField] Button[] _choiceButtons;
     
     Story _story;
-    
+
     [ContextMenu("Start Dialog")]
-    public void StartDialog()
+    public void StartDialog(TextAsset dialog)
     {
-        _story = new Story(_dialog.text);
+        _story = new Story(dialog.text);
         RefreshView();
     }
 
@@ -26,7 +24,7 @@ public class DialogController : MonoBehaviour
         StringBuilder storyTextBuilder = new StringBuilder();
         while (_story.canContinue)
             storyTextBuilder.AppendLine(_story.Continue());
-
+        
         _storyText.SetText(storyTextBuilder);
 
         for (int i = 0; i < _choiceButtons.Length; i++)
@@ -37,6 +35,9 @@ public class DialogController : MonoBehaviour
             if (i < _story.currentChoices.Count)
             {
                 var choice = _story.currentChoices[i];
+                Debug.Log(choice.text);
+                Debug.Log(button);
+                Debug.Log(button.GetComponentInChildren<TMP_Text>());
                 button.GetComponentInChildren<TMP_Text>().SetText(choice.text);
                 button.onClick.AddListener(() =>
                 {
