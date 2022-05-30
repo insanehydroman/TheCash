@@ -3,7 +3,7 @@ using UnityEngine;
 public class DialogGiver : MonoBehaviour
 {
     [SerializeField] TextAsset _dialog;
-    
+
     private void OnTriggerEnter(Collider other)
     {
         var player = other.GetComponent<ThirdPersonMover>();

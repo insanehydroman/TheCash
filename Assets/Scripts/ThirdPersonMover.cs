@@ -15,10 +15,10 @@ public class ThirdPersonMover : MonoBehaviour
     }
 
 
-        void Update()
+    void Update()
     {
         var mouseMovement = Input.GetAxis("Mouse X");
-        transform.Rotate(0, mouseMovement * Time.deltaTime * _turnSpeed, 0 );
+        transform.Rotate(0, mouseMovement * Time.deltaTime * _turnSpeed, 0);
     }
 
     void FixedUpdate()
@@ -36,7 +36,7 @@ public class ThirdPersonMover : MonoBehaviour
         velocity *= _moveSpeed * Time.fixedDeltaTime;
         Vector3 offset = transform.rotation * velocity;
         _rb.MovePosition(transform.position + offset);
-        
+
         _animator.SetFloat("Vertical", vertical, 0.1f, Time.fixedDeltaTime);
         _animator.SetFloat("Horizontal", horizontal, 0.1f, Time.fixedDeltaTime);
     }
